@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite DSA & MERN Stack Study Planner</title>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-section">
+        <div class="brand-logo">S</div>
+        <div class="brand-name">
+          <h1>PrepMaster</h1>
+          <span>L6 Architect</span>
+        </div>
+      </div>
+      
+      <nav style="flex-grow: 1;">
+        <ul class="nav-links">
+          <li class="nav-item active" data-tab="dashboard">
+            <button><i class="fa-solid fa-chart-pie"></i> Dashboard</button>
+          </li>
+          <li class="nav-item" data-tab="dsa">
+            <button><i class="fa-solid fa-code"></i> DSA Tracker</button>
+          </li>
+          <li class="nav-item" data-tab="mern">
+            <button><i class="fa-solid fa-layer-group"></i> MERN Roadmap</button>
+          </li>
+          <li class="nav-item" data-tab="planner">
+            <button><i class="fa-solid fa-calendar-days"></i> Daily Planner</button>
+          </li>
+          <li class="nav-item" data-tab="prep-hub">
+            <button><i class="fa-solid fa-briefcase"></i> Interview Prep Hub</button>
+          </li>
+          <li class="nav-item" data-tab="notes">
+            <button><i class="fa-solid fa-note-sticky"></i> Notes Scratchpad</button>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">R</div>
+          <div class="user-info">
+            <div class="user-name">Rishav</div>
+            <div class="user-target">Target: FAANG Staff</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Working Area -->
+    <main class="main-content">
+      
+      <!-- Top header bar -->
+      <header class="top-header">
+        <div class="page-title">
+          <h2 id="header-title-text">Dashboard Overview</h2>
+        </div>
+        <div class="header-actions">
+          <div class="streak-counter" title="Consecutive active study days!">
+            <i class="fa-solid fa-fire"></i>
+            <span id="streak-days-count">0</span> Day Streak
+          </div>
+        </div>
+      </header>
+
+      <!-- TAB: DASHBOARD -->
+      <section id="tab-dashboard" class="tab-panel active">
+        <!-- Stats cards -->
+        <div class="stats-grid">
+          <div class="glass-card stat-card">
+            <div class="stat-details">
+              <h3>DSA Progress</h3>
+              <div class="stat-value" id="stats-dsa-count">0/50</div>
+              <div class="stat-subtext">Problems solved</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-code"></i></div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-details">
+              <h3>MERN Milestones</h3>
+              <div class="stat-value" id="stats-mern-count">0/28</div>
+              <div class="stat-subtext">Milestones finished</div>
+            </div>
+            <div class="stat-icon success-icon"><i class="fa-solid fa-layer-group"></i></div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-details">
+              <h3>STAR Behaviors</h3>
+              <div class="stat-value" id="stats-star-count">0</div>
+              <div class="stat-subtext">Prepared scenarios</div>
+            </div>
+            <div class="stat-icon danger-icon"><i class="fa-solid fa-user-tie"></i></div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-details">
+              <h3>Mocks Completed</h3>
+              <div class="stat-value" id="stats-mocks-count">0</div>
+              <div class="stat-subtext">Self-evaluations done</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          </div>
+        </div>
+
+        <!-- Analytics Row -->
+        <div class="analytics-row">
+          <div class="glass-card">
+            <div class="section-header">
+              <h3>Weekly Coding Activity</h3>
+              <span style="font-size: 12px; color: var(--text-muted);">Hours logged daily</span>
+            </div>
+            <div class="chart-container" id="dashboard-bars-chart">
+              <!-- Bars generated dynamically in app.js -->
+            </div>
+          </div>
+          <div class="glass-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div class="section-header" style="width: 100%;">
+              <h3>Overall Readiness</h3>
+            </div>
+            <div class="circular-progress-box">
+              <div class="svg-ring-container">
+                <svg class="svg-ring" width="160" height="160">
+                  <circle class="svg-ring-bg" cx="80" cy="80" r="70" stroke-width="8" fill="transparent"/>
+                  <circle class="svg-ring-circle" id="overall-progress-circle" cx="80" cy="80" r="70" stroke-width="8" fill="transparent" stroke-dasharray="439.8" stroke-dashoffset="439.8"/>
+                </svg>
+                <div class="ring-text-overlay">
+                  <div class="ring-percent" id="overall-progress-percent">0%</div>
+                  <div class="ring-label">Ready</div>
+                </div>
+              </div>
+              <div class="progress-legends">
+                <div class="legend-item">
+                  <div class="legend-color-label">
+                    <span class="legend-dot" style="background-color: var(--primary);"></span>
+                    <span>DSA solved</span>
+                  </div>
+                  <div class="legend-value" id="legend-dsa-pct">0%</div>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color-label">
+                    <span class="legend-dot" style="background-color: var(--success);"></span>
+                    <span>MERN completed</span>
+                  </div>
+                  <div class="legend-value" id="legend-mern-pct">0%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Tasks List -->
+        <div class="glass-card">
+          <div class="section-header">
+            <h3>Recent Milestones Due</h3>
+            <span style="font-size: 12px; color: var(--primary); cursor: pointer;" onclick="app.switchTab('planner')">Go to Planner</span>
+          </div>
+          <div class="recent-tasks-list" id="dashboard-recent-tasks">
+            <!-- Dynamic task checks -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: DSA TRACKER -->
+      <section id="tab-dsa" class="tab-panel">
+        <div class="control-bar">
+          <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="dsa-search-input" placeholder="Search problems or patterns...">
+          </div>
+          <div class="filter-group">
+            <select class="filter-dropdown" id="dsa-difficulty-filter">
+              <option value="all">All Difficulties</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+            <select class="filter-dropdown" id="dsa-status-filter">
+              <option value="all">All Statuses</option>
+              <option value="solved">Solved</option>
+              <option value="unsolved">Unsolved</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="dsa-layout">
+          <aside class="topic-list" id="dsa-topic-list">
+            <!-- Filled dynamically in app.js -->
+          </aside>
+          
+          <div class="glass-card" style="padding: 0; overflow: hidden;">
+            <div class="problems-table-container">
+              <table class="problems-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;">Status</th>
+                    <th>Problem Name</th>
+                    <th>Pattern</th>
+                    <th>Difficulty</th>
+                    <th style="width: 150px; text-align: right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dsa-problems-body">
+                  <!-- Filled dynamically in app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: MERN ROADMAP -->
+      <section id="tab-mern" class="tab-panel">
+        <div class="mern-roadmap-container" id="mern-roadmap-body">
+          <!-- Filled dynamically in app.js (accordions for each phase) -->
+        </div>
+      </section>
+
+      <!-- TAB: DAILY PLANNER -->
+      <section id="tab-planner" class="tab-panel">
+        <div class="planner-grid">
+          <!-- Calendar Card -->
+          <div class="glass-card calendar-box">
+            <div class="calendar-header">
+              <button class="calendar-nav-btn" id="prev-month-btn"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="calendar-title" id="calendar-month-year">July 2026</div>
+              <button class="calendar-nav-btn" id="next-month-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar-days-header">
+              <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendar-days-grid">
+              <!-- Filled dynamically in app.js -->
+            </div>
+          </div>
+
+          <!-- Daily task list and hour logger -->
+          <div class="daily-schedule-box">
+            <div class="glass-card">
+              <div class="section-header">
+                <h3>Log Study Hours</h3>
+              </div>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <input type="number" id="study-hours-input" class="form-control" style="max-width: 120px;" placeholder="Hours (e.g. 4)" min="1" max="24">
+                <button class="add-event-btn" id="log-hours-submit-btn"><i class="fa-solid fa-hourglass-half"></i> Log Today</button>
+              </div>
+            </div>
+
+            <div class="glass-card" style="flex-grow: 1;">
+              <div class="scheduler-title-section">
+                <h3 class="selected-date-title" id="planner-selected-date">Today's Schedule</h3>
+                <button class="add-event-btn" id="open-event-modal-btn"><i class="fa-solid fa-plus"></i> Add Event</button>
+              </div>
+              <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 16px 0;">
+              <div class="schedule-list" id="planner-schedule-list">
+                <!-- Filled dynamically in app.js -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: INTERVIEW PREP HUB -->
+      <section id="tab-prep-hub" class="tab-panel">
+        <div class="prep-tabs-header">
+          <button class="prep-tab-btn active" data-subtab="system-design">System Design Core</button>
+          <button class="prep-tab-btn" data-subtab="behavioral">Behavioral (STAR) Helper</button>
+          <button class="prep-tab-btn" data-subtab="mock-sim">Mock Simulator</button>
+        </div>
+
+        <!-- Subtab: System Design -->
+        <div id="subtab-system-design" class="prep-subpanel active">
+          <div class="system-design-grid" id="system-design-cards">
+            <!-- Filled dynamically in app.js -->
+          </div>
+        </div>
+
+        <!-- Subtab: Behavioral -->
+        <div id="subtab-behavioral" class="prep-subpanel">
+          <div class="star-layout">
+            <div class="glass-card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">Add Behavior Card</h3>
+              <form id="star-builder-form">
+                <div class="form-group">
+                  <label class="form-label">Scenario Title</label>
+                  <input type="text" id="star-title" class="form-control" placeholder="e.g. Led Refactoring of Legacy Auth" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Core Principle/Skill</label>
+                  <input type="text" id="star-principle" class="form-control" placeholder="e.g. Customer Obsession / Scalability" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Situation</label>
+                  <textarea id="star-situation" class="form-control" placeholder="Describe the background and challenge..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Task</label>
+                  <textarea id="star-task" class="form-control" placeholder="What needed to be done?" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Action</label>
+                  <textarea id="star-action" class="form-control" placeholder="What actions did YOU take specifically?" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Result</label>
+                  <textarea id="star-result" class="form-control" placeholder="What was the business/tech outcome? (Use metrics)" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fa-solid fa-save"></i> Save Scenario</button>
+              </form>
+            </div>
+            
+            <div class="star-cards-list" id="behavioral-cards-container">
+              <!-- Filled dynamically in app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Subtab: Mock Simulator -->
+        <div id="subtab-mock-sim" class="prep-subpanel">
+          <div class="mock-setup-grid">
+            <div class="glass-card" style="display:flex; flex-direction:column; gap:16px;">
+              <h3 style="font-size: 16px; font-weight: 700;">Start Mock Interview</h3>
+              <div class="form-group">
+                <label class="form-label">Select Interview Type</label>
+                <select class="filter-dropdown" style="width:100%;" id="mock-select-type">
+                  <option value="dsa">Coding (DSA) Interview</option>
+                  <option value="system">System Design (HLD/LLD) Interview</option>
+                </select>
+              </div>
+              <button class="submit-btn" id="mock-start-session-btn"><i class="fa-solid fa-circle-play"></i> Generate & Start Mock</button>
+            </div>
+
+            <div class="glass-card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Evaluation History</h3>
+              <div style="overflow-x: auto;">
+                <table class="mock-history-table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Type</th>
+                      <th>Grade</th>
+                      <th>Feedback</th>
+                    </tr>
+                  </thead>
+                  <tbody id="mock-history-tbody">
+                    <!-- Filled dynamically in app.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulator Active Screen (Hidden until started) -->
+          <div class="glass-card mock-simulator-box" id="mock-active-simulator" style="display: none;">
+            <div class="mock-header">
+              <div class="mock-title-info">
+                <h3 id="mock-active-title">Design Rate Limiter</h3>
+                <div class="mock-meta">
+                  <span class="mock-type-badge" id="mock-active-type">System Design</span>
+                  <span class="difficulty-badge medium" id="mock-active-diff">Medium</span>
+                </div>
+              </div>
+              <div class="mock-timer-box" id="mock-active-timer">45:00</div>
+            </div>
+
+            <div class="mock-description-section">
+              <h4>Interview Prompt</h4>
+              <p class="mock-description-content" id="mock-active-desc">Detailed interview prompt...</p>
+            </div>
+
+            <div class="mock-rubric-accordion" id="mock-active-rubric-accordion">
+              <div class="mock-rubric-header" id="mock-rubric-toggle">
+                <span>View Evaluation Criteria & Rubrics</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="mock-rubric-body" id="mock-active-rubric-body">
+                <!-- Evaluation steps loaded from data.js -->
+              </div>
+            </div>
+
+            <hr style="border:0; border-top: 1px solid var(--border-color);">
+
+            <div class="mock-score-section">
+              <div style="flex-grow:1; display:flex; flex-direction:column; gap:16px;">
+                <h4 style="font-size: 14px; font-weight: 700; color: var(--primary);">Self Evaluation</h4>
+                <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                  <div class="form-group" style="flex:1; min-width: 140px;">
+                    <label class="form-label">Grade</label>
+                    <select class="filter-dropdown" style="width:100%;" id="mock-eval-grade">
+                      <option value="Strong Pass">Strong Pass</option>
+                      <option value="Pass">Pass</option>
+                      <option value="Borderline">Borderline</option>
+                      <option value="Fail">Fail</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="flex:2; min-width: 250px;">
+                    <label class="form-label">Feedback/Key Takeaway</label>
+                    <input type="text" id="mock-eval-feedback" class="form-control" placeholder="e.g. Mastered the sliding window count, but need to speed up code.">
+                  </div>
+                </div>
+              </div>
+              <div class="mock-controls">
+                <button class="mock-btn mock-btn-stop" id="mock-end-session-btn"><i class="fa-solid fa-square-envelope"></i> Submit Score</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: NOTES / SCRATCHPAD -->
+      <section id="tab-notes" class="tab-panel">
+        <div class="notes-layout">
+          <aside class="notes-sidebar" id="notes-sidebar-list">
+            <!-- Filled dynamically in app.js (categories for each DSA/MERN topic) -->
+          </aside>
+          
+          <div class="glass-card notes-editor-box">
+            <div class="notes-header-bar">
+              <h3 style="font-size: 16px; font-weight: 700;" id="notes-active-title">General Notes</h3>
+              <div class="autosave-indicator">
+                <i class="fa-solid fa-circle-check"></i> <span id="autosave-status">All changes saved offline</span>
+              </div>
+            </div>
+            <textarea class="notes-textarea" id="notes-content-textarea" placeholder="Write code snippets, interview concepts, cheatsheets, or patterns here. Auto-saved in local storage..."></textarea>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- MODAL: ADD EVENT -->
+  <div class="modal-overlay" id="add-event-modal">
+    <div class="modal-content-box">
+      <div class="modal-header">
+        <h3>Add Planner Event</h3>
+      </div>
+      <form id="add-event-form">
+        <div class="form-group">
+          <label class="form-label">Event Description</label>
+          <input type="text" id="modal-event-title" class="form-control" placeholder="e.g. Solve 3 Binary Search questions" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Time</label>
+          <input type="time" id="modal-event-time" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Topic Type</label>
+          <select class="filter-dropdown" style="width:100%;" id="modal-event-type">
+            <option value="study">General Study</option>
+            <option value="dsa">DSA Focus</option>
+            <option value="mern">MERN Dev Focus</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="modal-btn modal-btn-cancel" id="close-event-modal-btn">Cancel</button>
+          <button type="submit" class="modal-btn modal-btn-save">Save Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: PROBLEM QUICK NOTES -->
+  <div class="modal-overlay" id="problem-note-modal">
+    <div class="modal-content-box" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 id="problem-note-modal-title">Notes on Two Sum</h3>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Pattern/Concept Hint</label>
+        <div style="background-color: var(--bg-main); padding: 12px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-secondary); border: 1px solid var(--border-color); margin-bottom: 12px;" id="problem-note-modal-hint">
+          Standard hash map tracking complements.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Solution Notes & Snippets</label>
+        <textarea id="problem-note-modal-textarea" class="notes-textarea" style="height: 180px;" placeholder="Write optimal complexity details or Java/JS code syntax..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-btn modal-btn-cancel" id="close-problem-note-btn">Close</button>
+        <button type="button" class="modal-btn modal-btn-save" id="save-problem-note-btn">Save Solution</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Database -->
+  <script src="data.js"></script>
+  <!-- App controller -->
+  <script src="app.js"></script>
+</body>
+</html>
