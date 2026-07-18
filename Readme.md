@@ -3,7 +3,6 @@
 A full-stack web application to help students plan, organize, and track their study sessions efficiently.
 
 **Live Demo:** [https://study-planner-n3hd.onrender.com](https://study-planner-n3hd.onrender.com)  
-**GitHub Repo:** [https://github.com/rishumour/Study-Planner](https://github.com/rishumour/Study-Planner)
 
 ## Features
 
